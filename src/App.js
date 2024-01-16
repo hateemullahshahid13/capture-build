@@ -8,7 +8,8 @@ import ContactUs from './pages/ContactUs';
 import MovieDetail from './pages/MovieDetail';
 import Nav from './components/Nav';
 //Router
-import { Route, Switch, useLocation } from 'react-router-dom';
+// In React Router version 6 they have replaced Switch with Routes because of that the code doesn't work anymore.
+import { Route, Routes, useLocation } from 'react-router-dom';
 //Animation
 import { AnimatePresence } from 'framer-motion';
 
@@ -19,20 +20,13 @@ function App() {
       <GlobalStyle />
       <Nav />
       <AnimatePresence exitBeforeEnter>
-        <Switch location={location} key={location.pathname}>
-          <Route path="/" exact>
-            <AboutUs />
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" exact elememt={<AboutUs />}>
           </Route>
-          <Route path="/work" exact>
-            <OurWork />
-          </Route>
-          <Route path="/contact">
-            <ContactUs />
-          </Route>
-          <Route path="/work/:id">
-            <MovieDetail />
-          </Route>
-        </Switch>
+          <Route path="/work" exact element={<OurWork />}></Route>
+          <Route path="/contact" element={<ContactUs />}></Route>
+          <Route path="/work/:id" element={<MovieDetail />}></Route>
+        </Routes>
       </AnimatePresence>
     </div>
   );
